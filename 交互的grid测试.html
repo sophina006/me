@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid 后台演示</title>
+    <style>
+        /* 全局重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;  /* 占满整个视口高度 */
+            font-family: system-ui, sans-serif;
+        }
+
+        /* ⭐ 关键：Grid 布局容器 */
+        .app {
+            display: grid;
+            /* 定义两列：侧边栏 250px，主内容区占剩余宽度 */
+            grid-template-columns: 250px 1fr;
+            /* 定义两行：顶部栏 auto(自动高度)，主内容区占剩余高度 */
+            grid-template-rows: auto 1fr;
+            height: 100%;
+        }
+
+        /* 顶部导航栏 - 横跨两列 */
+        .header {
+            grid-column: 1 / 3;  /* 从第1条列线开始，到第3条列线结束（即占满两列） */
+            background: #1a1a2e;
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* 侧边栏 */
+        .sidebar {
+            background: #16213e;
+            color: #eee;
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        .sidebar ul {
+            list-style: none;
+        }
+
+        .sidebar li {
+            margin: 1rem 0;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: background 0.2s;
+            position: relative;
+        }
+
+        .sidebar li:hover {
+            background: #0f3460;
+        }
+
+        /* 悬停弹窗样式 */
+        .tooltip {
+            position: absolute;
+            left: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #0f3460;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            white-space: nowrap;
+            z-index: 1000;
+            margin-left: 10px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .sidebar li:hover .tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* 子菜单样式 */
+        .submenu {
+            position: absolute;
+            left: 100%;
+            top: 0;
+            background: #16213e;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            padding: 0.5rem 0;
+            min-width: 150px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .sidebar li:hover .submenu {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .submenu li {
+            margin: 0;
+            padding: 0.5rem 1rem;
+            border-radius: 0;
+        }
+
+        .submenu li:hover {
+            background: #0f3460;
+        }
+
+        /* 主内容区 */
+        .main {
+            background: #f0f2f5;
+            padding: 1.5rem;
+            overflow-y: auto;  /* 内容过多时滚动 */
+        }
+
+        /* 卡片网格 - 里面又用了一个 Grid 或 Flex，展示数据卡片 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+
+        .card h3 {
+            margin-bottom: 0.5rem;
+            color: #1a1a2e;
+        }
+
+        .card p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* 按钮样式 */
+        .btn {
+            background: #0f3460;
+            border: none;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #1a4a7a;
+        }
+
+        /* 汉堡菜单按钮 */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            /* 调整Grid布局 */
+            .app {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto 1fr;
+            }
+
+            /* 顶部导航栏 */
+            .header {
+                grid-column: 1 / 2;
+                padding: 1rem;
+            }
+
+            /* 汉堡菜单按钮显示 */
+            .menu-toggle {
+                display: block;
+            }
+
+            /* 侧边栏默认隐藏 */
+            .sidebar {
+                grid-row: 2;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+                padding: 0;
+            }
+
+            /* 侧边栏展开状态 */
+            .sidebar.open {
+                max-height: 400px;
+                padding: 1.5rem;
+            }
+
+            /* 主内容区 */
+            .main {
+                grid-row: 3;
+                padding: 1rem;
+            }
+
+            /* 卡片网格调整 */
+            .card-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 1rem;
+            }
+
+            /* 卡片样式调整 */
+            .card {
+                padding: 1rem;
+            }
+
+            /* 悬停弹窗在移动设备上不显示 */
+            .tooltip {
+                display: none;
+            }
+
+            /* 子菜单调整为垂直显示 */
+            .submenu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                background: transparent;
+                box-shadow: none;
+                padding: 0.5rem 0 0 1.5rem;
+                margin-top: 0.5rem;
+            }
+
+            /* 子菜单项样式调整 */
+            .submenu li {
+                padding: 0.3rem 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="app">
+    <!-- 顶部导航栏 -->
+    <header class="header">
+        <div style="display: flex; align-items: center; gap: 1rem;">
+            <button class="menu-toggle" id="menuToggle">☰</button>
+            <h2>📊 我的后台</h2>
+        </div>
+        <button class="btn" id="welcomeBtn">打招呼</button>
+    </header>
+
+    <!-- 侧边栏导航 -->
+    <aside class="sidebar">
+        <ul>
+            <li>
+                🏠 仪表盘
+                <span class="tooltip">查看仪表盘</span>
+            </li>
+            <li>
+                📈 数据分析
+                <span class="tooltip">查看数据分析</span>
+            </li>
+            <li>
+                ⚙️ 设置
+                <span class="tooltip">打开设置</span>
+                <ul class="submenu">
+                    <li data-action="personal-info">个人信息</li>
+                    <li data-action="brightness">亮度显示</li>
+                    <li data-action="volume">音量调节</li>
+                </ul>
+            </li>
+            <li>
+                👤 个人资料
+                <span class="tooltip">查看个人资料</span>
+                <ul class="submenu">
+                    <li data-action="shop-address">店铺地址</li>
+                    <li data-action="shop-phone">门店电话</li>
+                </ul>
+            </li>
+        </ul>
+    </aside>
+
+    <!-- 主内容区 -->
+    <main class="main">
+        <h2>欢迎回来，管理员</h2>
+        <p>这是用 Grid 搭建的布局：侧边栏固定宽度 + 主区域自适应。</p>
+
+        <!-- 卡片展示区（又用 Grid 做了响应式卡片排列） -->
+        <div class="card-grid">
+            <div class="card">
+                <h3>用户数</h3>
+                <p>1,234 人</p>
+            </div>
+            <div class="card">
+                <h3>收入</h3>
+                <p>¥12,345</p>
+            </div>
+            <div class="card">
+                <h3>转化率</h3>
+                <p>23.5%</p>
+            </div>
+            <div class="card">
+                <h3>任务完成</h3>
+                <p>78/100</p>
+            </div>
+        </div>
+    </main>
+</div>
+
+<script>
+    // 简单的 JavaScript 交互
+    const btn = document.getElementById('welcomeBtn');
+    btn.addEventListener('click', () => {
+        alert('👋 你好！这个页面是用 Grid 布局做的。');
+    });
+
+    // 汉堡菜单按钮点击事件
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebar = document.querySelector('.sidebar');
+    
+    menuToggle.addEventListener('click', () => {
+        sidebar.classList.toggle('open');
+    });
+
+    // 为侧边栏菜单项添加点击事件
+    const sidebarItems = document.querySelectorAll('.sidebar li:not(.submenu li)');
+    sidebarItems.forEach(item => {
+        item.addEventListener('click', function(e) {
+            // 阻止事件冒泡，避免触发子菜单的点击事件
+            if (e.target.closest('.submenu')) {
+                return;
+            }
+            
+            const text = this.textContent.trim().split(' ')[1];
+            alert(`你点击了：${text}`);
+        });
+    });
+
+    // 为子菜单项添加点击事件
+    const submenuItems = document.querySelectorAll('.submenu li');
+    submenuItems.forEach(item => {
+        item.addEventListener('click', function(e) {
+            e.stopPropagation(); // 阻止事件冒泡
+            
+            const action = this.dataset.action;
+            let message = '';
+            
+            switch(action) {
+                case 'personal-info':
+                    message = '个人信息设置';
+                    break;
+                case 'brightness':
+                    message = '亮度显示设置';
+                    break;
+                case 'volume':
+                    message = '音量调节设置';
+                    break;
+                case 'shop-address':
+                    message = '店铺地址：北京市朝阳区建国路88号';
+                    break;
+                case 'shop-phone':
+                    message = '门店电话：123-456-7890';
+                    break;
+                default:
+                    message = '未知操作';
+            }
+            
+            alert(message);
+        });
+    });
+</script>
+</body>
+</html>
