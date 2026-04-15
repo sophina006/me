@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Awebuwant - 可爱欧美风电商</title>
+    <title>Awebuwant - 毛衣</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -14,7 +14,7 @@
                 <h1>Awebuwant</h1>
             </div>
             <div class="nav-links">
-                <a href="#">首页</a>
+                <a href="index.html">首页</a>
                 <a href="#">新品</a>
                 <a href="#">热销</a>
                 <a href="#">关于我们</a>
@@ -34,12 +34,12 @@
         <aside class="sidebar">
             <button class="mobile-menu-btn" onclick="toggleMenu()">商品分类 ▾</button>
             <ul class="category-list" id="categoryList">
-                <li><a href="index.html" class="active">全部商品 All</a></li>
+                <li><a href="index.html">全部商品 All</a></li>
                 <li class="has-submenu">
-                    <a href="#" class="category-toggle">衣服 Clothes</a>
-                    <ul class="submenu">
+                    <a href="#" class="category-toggle active">衣服 Clothes</a>
+                    <ul class="submenu show">
                         <li><a href="tops.html">上衣 Tops</a></li>
-                        <li><a href="sweaters.html">毛衣 Sweaters</a></li>
+                        <li><a href="sweaters.html" class="active">毛衣 Sweaters</a></li>
                         <li><a href="#">裤子 Bottoms</a></li>
                         <li><a href="#">裙子 Dresses</a></li>
                         <li><a href="#">外套 Outerwear</a></li>
@@ -61,99 +61,9 @@
         
         <!-- 右侧内容区域 -->
         <div class="content-area">
-            <h2 class="section-title">精选商品</h2>
+            <h2 class="section-title">毛衣 Sweaters</h2>
             <div class="products-grid">
-                <!-- 上衣商品 -->
                 <!-- 商品卡片 1 -->
-                <div class="product-card" data-name="Ashlyn Top">
-                    <div class="product-image">
-                        <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=cute%20pink%20top%20ashlyn%20style%20cartoon%20cute&image_size=square" alt="Ashlyn Top">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Ashlyn Top</h3>
-                        <p class="product-price">¥129.00</p>
-                        <div class="quantity-control">
-                            <button class="decrease-btn">-</button>
-                            <span class="quantity">1</span>
-                            <button class="increase-btn">+</button>
-                            <button class="favorite-btn">❤️</button>
-                            <div class="favorite-toast">已收藏</div>
-                        </div>
-                        <div class="product-buttons">
-                            <button class="add-to-cart-btn">加入购物车</button>
-                            <button class="buy-btn">购买</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 商品卡片 2 -->
-                <div class="product-card" data-name="Ginny Top">
-                    <div class="product-image">
-                        <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=cute%20pink%20top%20ginny%20style%20cartoon%20cute&image_size=square" alt="Ginny Top">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Ginny Top</h3>
-                        <p class="product-price">¥119.00</p>
-                        <div class="quantity-control">
-                            <button class="decrease-btn">-</button>
-                            <span class="quantity">1</span>
-                            <button class="increase-btn">+</button>
-                            <button class="favorite-btn">❤️</button>
-                            <div class="favorite-toast">已收藏</div>
-                        </div>
-                        <div class="product-buttons">
-                            <button class="add-to-cart-btn">加入购物车</button>
-                            <button class="buy-btn">购买</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 商品卡片 3 -->
-                <div class="product-card" data-name="Zelly Top">
-                    <div class="product-image">
-                        <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=cute%20pink%20top%20zelly%20style%20cartoon%20cute&image_size=square" alt="Zelly Top">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Zelly Top</h3>
-                        <p class="product-price">¥139.00</p>
-                        <div class="quantity-control">
-                            <button class="decrease-btn">-</button>
-                            <span class="quantity">1</span>
-                            <button class="increase-btn">+</button>
-                            <button class="favorite-btn">❤️</button>
-                            <div class="favorite-toast">已收藏</div>
-                        </div>
-                        <div class="product-buttons">
-                            <button class="add-to-cart-btn">加入购物车</button>
-                            <button class="buy-btn">购买</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 商品卡片 4 -->
-                <div class="product-card" data-name="Hailie Top">
-                    <div class="product-image">
-                        <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=cute%20pink%20top%20hailie%20style%20cartoon%20cute&image_size=square" alt="Hailie Top">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">Hailie Top</h3>
-                        <p class="product-price">¥109.00</p>
-                        <div class="quantity-control">
-                            <button class="decrease-btn">-</button>
-                            <span class="quantity">1</span>
-                            <button class="increase-btn">+</button>
-                            <button class="favorite-btn">❤️</button>
-                            <div class="favorite-toast">已收藏</div>
-                        </div>
-                        <div class="product-buttons">
-                            <button class="add-to-cart-btn">加入购物车</button>
-                            <button class="buy-btn">购买</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 毛衣商品 -->
-                <!-- 商品卡片 5 -->
                 <div class="product-card" data-name="Nikki Sweater">
                     <div class="product-image">
                         <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=cute%20pink%20sweater%20nikki%20style%20cartoon%20cute&image_size=square" alt="Nikki Sweater">
@@ -175,7 +85,7 @@
                     </div>
                 </div>
 
-                <!-- 商品卡片 6 -->
+                <!-- 商品卡片 2 -->
                 <div class="product-card" data-name="Amber Sweater">
                     <div class="product-image">
                         <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=cute%20pink%20sweater%20amber%20style%20cartoon%20cute&image_size=square" alt="Amber Sweater">
@@ -197,7 +107,7 @@
                     </div>
                 </div>
 
-                <!-- 商品卡片 7 -->
+                <!-- 商品卡片 3 -->
                 <div class="product-card" data-name="Shannon Sweater">
                     <div class="product-image">
                         <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=cute%20pink%20sweater%20shannon%20style%20cartoon%20cute&image_size=square" alt="Shannon Sweater">
@@ -219,7 +129,7 @@
                     </div>
                 </div>
 
-                <!-- 商品卡片 8 -->
+                <!-- 商品卡片 4 -->
                 <div class="product-card" data-name="Amaile Cardigan">
                     <div class="product-image">
                         <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=cute%20pink%20cardigan%20amaile%20style%20cartoon%20cute&image_size=square" alt="Amaile Cardigan">
@@ -241,7 +151,7 @@
                     </div>
                 </div>
 
-                <!-- 商品卡片 9 -->
+                <!-- 商品卡片 5 -->
                 <div class="product-card" data-name="Colette Sweater">
                     <div class="product-image">
                         <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=cute%20pink%20sweater%20colette%20style%20cartoon%20cute&image_size=square" alt="Colette Sweater">
@@ -263,7 +173,7 @@
                     </div>
                 </div>
 
-                <!-- 商品卡片 10 -->
+                <!-- 商品卡片 6 -->
                 <div class="product-card" data-name="Crystal Sweater">
                     <div class="product-image">
                         <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=cute%20pink%20sweater%20crystal%20style%20cartoon%20cute&image_size=square" alt="Crystal Sweater">

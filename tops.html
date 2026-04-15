@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>上衣 - Cutie Shop</title>
+    <title>Awebuwant - 上衣</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -11,7 +11,7 @@
     <nav class="navbar">
         <div class="navbar-container">
             <div class="logo">
-                <h1>Cutie Shop</h1>
+                <h1>Awebuwant</h1>
             </div>
             <div class="nav-links">
                 <a href="index.html">首页</a>
@@ -32,26 +32,22 @@
     <main class="main-content">
         <!-- 左侧边栏 -->
         <aside class="sidebar">
-            <h3>商品分类</h3>
-            <ul>
-                <li><a href="index.html">全部商品</a></li>
-                
-                <!-- 衣服分类 -->
-                <li class="category-item">
-                    <a href="#" class="category-toggle active">衣服 Clothing</a>
-                    <ul class="subcategory show">
+            <button class="mobile-menu-btn" onclick="toggleMenu()">商品分类 ▾</button>
+            <ul class="category-list" id="categoryList">
+                <li><a href="index.html">全部商品 All</a></li>
+                <li class="has-submenu">
+                    <a href="#" class="category-toggle active">衣服 Clothes</a>
+                    <ul class="submenu show">
                         <li><a href="tops.html" class="active">上衣 Tops</a></li>
-                        <li><a href="#">毛衣 Sweaters</a></li>
+                        <li><a href="sweaters.html">毛衣 Sweaters</a></li>
                         <li><a href="#">裤子 Bottoms</a></li>
                         <li><a href="#">裙子 Dresses</a></li>
                         <li><a href="#">外套 Outerwear</a></li>
                     </ul>
                 </li>
-                
-                <!-- 配饰分类 -->
-                <li class="category-item">
+                <li class="has-submenu">
                     <a href="#" class="category-toggle">配饰 Accessories</a>
-                    <ul class="subcategory">
+                    <ul class="submenu">
                         <li><a href="#">包包 Bags</a></li>
                         <li><a href="#">皮带 Belts</a></li>
                         <li><a href="#">袜子 Socks</a></li>
@@ -60,13 +56,7 @@
                 </li>
             </ul>
             
-            <h3 style="margin-top: 2rem;">价格范围</h3>
-            <ul>
-                <li><a href="#">0-50元</a></li>
-                <li><a href="#">50-100元</a></li>
-                <li><a href="#">100-200元</a></li>
-                <li><a href="#">200元以上</a></li>
-            </ul>
+
         </aside>
         
         <!-- 右侧内容区域 -->

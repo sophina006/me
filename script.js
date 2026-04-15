@@ -1,6 +1,12 @@
 // 购物车数据
 let cart = [];
 
+// 移动端菜单切换
+function toggleMenu() {
+    const categoryList = document.getElementById('categoryList');
+    categoryList.classList.toggle('active');
+}
+
 // 页面加载完成后执行
 document.addEventListener('DOMContentLoaded', function() {
     // 分类展开/折叠功能
